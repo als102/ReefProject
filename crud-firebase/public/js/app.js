@@ -5,8 +5,6 @@ const firebaseConfig = require('./keys');
 
 firebase.initializeApp(firebaseConfig);
 
-
-
 const yelpKey =
 	'M26cPdfZHgmyzDL35vMoA21fb7Y245Ga8LYPBrnKU3vsGk3QJ9qyhpW3dbyYO0jLWAkcamllM7_EpyymbO_brn5nOb7ipxNLCBxC0CpzTwiOiIns8q-fzjASbQ0NX3Yx';
 const URL =
@@ -40,7 +38,7 @@ fetch(req)
 // const param = document.getElementById('params');
 // console.log(param);
 // const submit = document.querySelector('.submit-btn');
-// const container = document.querySelector('.tank-container');
+
 // const list = document.querySelector('.tank-list');
 // const $clear = $('.clear-btn');
 // console.log($clear);
@@ -152,9 +150,9 @@ getPost();
 
 //charts section
 //to do  attach data to charts from data base
-//resize charts 
-//add labels 
-// customize colors 
+//resize charts
+//add labels
+// customize colors
 
 let labels1 = ['yes', 'yes in green'];
 let data1 = [69, 39];
