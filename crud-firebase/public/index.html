@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+
+		<title>Reef Tank Logs</title>
+
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    />
+    <!------ Charts------>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+		<!-- font awesome -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Pacifico"
+			rel="stylesheet"
+		/>
+		<link href="css/style.css" rel="stylesheet" />
+	</head>
+  <div id="wrap">
+    <form action="" autocomplete="off">
+    <input id="search" name="search" type="text" placeholder="Restock? Find nearest Shop ?"><input id="userin" type="submit">
+    
+  
+  </form>
+
+  </div>
+  <body>
+		<div class="container">
+			<div class="panel-group">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h1>
+							Reef Tank Blog <i class="fa fa-tint" aria-hidden="true"></i>
+            </h1>
+          </div>
+						<section class="section-center">
+						<form class="reef-form">
+						
+						<h3>Reef checklist</h3>
+						<div class="form-control">
+            <input type="text" id="params" placeholder="e.g check temp" />
+            <button type="submit" class= "submit-btn">submit </button>
+          </div>
+            </form>
+
+            <!---List-->
+            <div class= "tank-container">
+              <div class="tank-list"></div>
+              <ul class="param-checklist"></ul>
+              <button type="button" class="clear-btn">clear items</button>
+            </div>
+
+            
+            </section>
+					<div class="panel-body">
+						<form action="" id="message-form">
+							<div class="form-group">
+								<label>Enter Parameters</label>
+								<textarea
+									id="message"
+									type="number"
+									class="form-control"
+									placeholder="Salinity, Alkalinity, Temp..."
+								></textarea>
+							</div>
+							<button class="btn">Submit</button>
+						</form>
+					</div>
+				</div>
+      </div>
+      
+
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h2>Logs<i class="fa fa-tint" aria-hidden="true"></i></h2>
+					</div>
+					<div class="panel-body">
+						<ul class="message-board"></ul>
+					</div>
+				</div>
+      </div>
+      <div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+            </div>
+          </div>
+          </div>
+
+				<h2>Graphs<i class="fa fa-tint" aria-hidden="true"></i></h2>
+          <div class= "container"> 
+          <div class = "row">
+					<div class="col-6 chart">
+              <canvas id="myChart" ></canvas>
+          </div>
+              <div class="col-6 chart">
+            <canvas id="myChart2"></canvas>
+          </div>
+          </div>
+          
+        </div>
+  
+        <!-- jQuery -->
+		<script
+			type="text/javascript"
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+		></script>
+		<!-- Bootstrap JS -->
+		<link
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+		/>
+		<!-- Firebase CDN -->
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAZNpBfrwTI_SoGYbEqxw6KStsbqOHaprY",
+    authDomain: "final-project-wip.firebaseapp.com",
+    databaseURL: "https://final-project-wip.firebaseio.com",
+    projectId: "final-project-wip",
+    storageBucket: "final-project-wip.appspot.com",
+    messagingSenderId: "326739532041",
+    appId: "1:326739532041:web:8639e2251822d751ef5bd8"
+  };
+			// Initialize Firebase
+			firebase.initializeApp(firebaseConfig);
+		</script>
+		<!-- js -->
+		<script src="js/bundle.js"></script>
+	</body>
+</html>
