@@ -21,57 +21,95 @@
 			href="https://fonts.googleapis.com/css?family=Pacifico"
 			rel="stylesheet"
 		/>
-		<link href="css/style.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+   
 	</head>
-  <div id="wrap">
-    <form action="" autocomplete="off">
-    <input id="search" name="search" type="text" placeholder="Restock? Find nearest Shop ?"><input id="userin" type="submit">
-    
-  
-  </form>
-
-  </div>
+ 
   <body>
-		<div class="container">
-			<div class="panel-group">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h1>
-							Reef Tank Blog <i class="fa fa-tint" aria-hidden="true"></i>
-            </h1>
-          </div>
-						<section class="section-center">
-						<form class="reef-form">
-						
-						<h3>Reef checklist</h3>
-						<div class="form-control">
-            <input type="text" id="params" placeholder="e.g check temp" />
-            <button type="submit" class= "submit-btn">submit </button>
-          </div>
-            </form>
+    
+    <div id="loader"class="loader-wrapper"></div>
+    <!--<div id="content"> --->
+        
+    </div>
 
-            <!---List-->
-            <div class= "tank-container">
-              <div class="tank-list"></div>
-              <ul class="param-checklist"></ul>
-              <button type="button" class="clear-btn">clear items</button>
-            </div>
+    <h1>
+      N15 Reefer Blog <i class="fa fa-tint" aria-hidden="true"></i>
+      
+    </h1>
+    <button class="sidebar-toggle">
+      <i class="fa fa-tint"></i>
+    </button>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="" id="logo"class="logo" alt="" />
+        <h2>Local Shops</h2>
+        <button class="close-button"><i class="fa fa-times"></i></button>
+      </div>
+      <!-- Shops -->
+      <ul class="links">
+        <li id = "shop1">
+          <a href="link1firsttograb"class="shoplinks">Soon Enough
+              <img src="" id="clown"width="50" height="50"alt="Avatar" >
+               
+          </a>
+        </li>
+        <li id ="shop2">
+          <a href="link2select"class="shoplinks">Give it time
+            <img id="angel"src="" alt="Avatar"width="75" height="50">
+               
+          </a>
+        </li>
+        <li id = "shop3">
+          <a href="link3"class="shoplinks">Still loading ...
+            <img id="wrasse"src="" alt="Avatar"width="75" height="50">
+               
+          </a>
+        </li>
+        <li id ="shop4">
+          <a href="link4"class="shoplinks">Just
+            <img id="rabbit"src="" alt="Avatar"width="50" height="98">
+               
+          </a>
+        </li>
+        <li id ="shop5">
+          <a href="link5"class="shoplinks">Waiting
+            <img id="clam"src="" alt="Avatar"width="50" height="50">
+               <p>test info</p>
+          </a>
+        </li>
+        <li id ="shop6">
+          <a href=""class="shoplinks">Tik Tock
+            <img id="tang"src="" alt="Avatar"width="50" height="50">
+               <p>Jus't Wait</p>
+          </a>
+        </li>
+      </ul>
+    </aside>  
+  </div>
+    <section class="section-center">
+  
 
             
             </section>
 					<div class="panel-body">
 						<form action="" id="message-form">
 							<div class="form-group">
-								<label>Enter Parameters</label>
-								<textarea
-									id="message"
-									type="number"
-									class="form-control"
-									placeholder="Salinity, Alkalinity, Temp..."
-								></textarea>
+                <label>Enter Parameters</label><br>
+                <br>
+                <label for="Alkalinity">Alkalinity:</label>
+								<input type="text" id="alk"class="form-control"name="Alkalinity"placeholder=" 7-12 "min="0" max="15"><br>
+                <label for="Salinity">Salinity:</label>
+                <input type="text" id="salinity"class="form-control"name="Salinity"placeholder=" 1.025 "><br>
+                <label for="Temp">Tempature:</label>
+                <input type="text" id="temp"class="form-control"name="Temp"placeholder=" 85 "><br>
+                  
+								
 							</div>
-							<button class="btn">Submit</button>
-						</form>
+              <button id= "submit" class="btn">Submit</button>
+              
+              
+            </form>
+            <button id="clear" class="btn">Clear Logs</button> 
 					</div>
 				</div>
       </div>
@@ -94,16 +132,19 @@
           </div>
           </div>
 
-				<h2>Graphs<i class="fa fa-tint" aria-hidden="true"></i></h2>
-          <div class= "container"> 
-          <div class = "row">
-					<div class="col-6 chart">
-              <canvas id="myChart" ></canvas>
-          </div>
+				<h2>Reef Charts<i class="fa fa-tint" aria-hidden="true"></i></h2>
+        <div class= "container"> 
+              <div class = "row">
+					        <div class="col-6 chart">
+                      <canvas id="myChart"width="200" height="75" ></canvas>
+                  </div>
+                  <div class="col-6 chart">
+                    <canvas id="myChart2"width="300" height="75"></canvas>
+              </div>
               <div class="col-6 chart">
-            <canvas id="myChart2"></canvas>
+                <canvas id="myChart3"width="200" height="75"></canvas>
           </div>
-          </div>
+            </div>
           
         </div>
   
@@ -125,17 +166,17 @@
 
 <script>
   // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyAZNpBfrwTI_SoGYbEqxw6KStsbqOHaprY",
-    authDomain: "final-project-wip.firebaseapp.com",
-    databaseURL: "https://final-project-wip.firebaseio.com",
-    projectId: "final-project-wip",
-    storageBucket: "final-project-wip.appspot.com",
-    messagingSenderId: "326739532041",
-    appId: "1:326739532041:web:8639e2251822d751ef5bd8"
-  };
+  // var firebaseConfig = {
+  //   apiKey: "AIzaSyAZNpBfrwTI_SoGYbEqxw6KStsbqOHaprY",
+  //   authDomain: "final-project-wip.firebaseapp.com",
+  //   databaseURL: "https://final-project-wip.firebaseio.com",
+  //   projectId: "final-project-wip",
+  //   storageBucket: "final-project-wip.appspot.com",
+  //   messagingSenderId: "326739532041",
+  //   appId: "1:326739532041:web:8639e2251822d751ef5bd8"
+  // };
 			// Initialize Firebase
-			firebase.initializeApp(firebaseConfig);
+		//	firebase.initializeApp(firebaseConfig);
 		</script>
 		<!-- js -->
 		<script src="js/bundle.js"></script>
