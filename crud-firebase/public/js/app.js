@@ -38,7 +38,7 @@ const yelpLinks = document.querySelectorAll("li a");
 // jquery function to show jellyfish loader
 
 $(window).on("load", function () {
-	$(".loader-wrapper").fadeOut("3000");
+	$(".loader-wrapper").fadeOut("slow");
 });
 
 // let h = new Headers();
@@ -62,7 +62,7 @@ fetch(req)
 		let shopsArray = [];
 		//console.log(shopsArray);
 		for (let i = 0; i < data.businesses.length; i++) {
-			var shops = { name: {}, url: {}, image: {}, phone: {} };
+			let shops = { name: {}, url: {}, image: {}, phone: {} };
 			//console.log(shops);
 			shops.name = data.businesses[i].name;
 			//console.log(shops.name);
@@ -94,28 +94,12 @@ fetch(req)
 
 		// fix by  append links and yelp names to the DOM outside of the loop circle back
 		//try async await?
-		// yelpLinks[0].href = shopsArray[0].url;
-		// yelpLinks[0].textContent = shopsArray[0].name;
+
 		shop1.appendChild(yelpLinks[0]);
-
-		// yelpLinks[1].href = shopsArray[1].url;
-		// yelpLinks[1].textContent = shopsArray[1].name;
 		shop2.appendChild(yelpLinks[1]);
-
-		// yelpLinks[2].href = shopsArray[2].url;
-		// yelpLinks[2].textContent = shopsArray[2].name;
 		shop3.appendChild(yelpLinks[2]);
-
-		// yelpLinks[3].href = shopsArray[3].url;
-		// yelpLinks[3].textContent = shopsArray[3].name;
 		shop4.appendChild(yelpLinks[3]);
-
-		// yelpLinks[4].href = shopsArray[4].url;
-		// yelpLinks[4].textContent = shopsArray[4].name;
 		shop5.appendChild(yelpLinks[4]);
-
-		// yelpLinks[5].href = shopsArray[5].url;
-		// yelpLinks[5].textContent = shopsArray[5].name;
 		shop6.appendChild(yelpLinks[5]);
 
 		// add image thumbnails
@@ -183,14 +167,17 @@ $(`#message-form`).submit((event) => {
 	var $alk = $("#alk").val();
 	var $salt = $("#salinity").val();
 	var $temp = $("#temp").val();
+	var $calcium = $("#calcium").val();
 	// console.log($alk);
 	// console.log($salt);
 	// console.log($temp);
+	console.log($calcium);
 
 	// clear user input
 	$("#alk").val("");
 	$("#salinity").val("");
 	$("#temp").val("");
+	$("#calcium").val("");
 
 	// create or refrence a section for message data in the database
 	var messageRefrence = Database.ref("newParam");
@@ -201,6 +188,7 @@ $(`#message-form`).submit((event) => {
 		alkalinity: $alk,
 		salinity: $salt,
 		temp: $temp,
+		calcium: $calcium,
 	});
 });
 
@@ -220,11 +208,13 @@ function postLogs() {
 			//console.log(param);
 			const temp = newParam[id].temp;
 			//console.log(temp);
+			const calcium = newParam[id].calcium;
 
 			//create list and add id
 			const alkListElment = document.createElement("li");
 			const salinityListElment = document.createElement("li");
 			const templistElement = document.createElement("li");
+			const calciumElement = document.createElement("li");
 
 			alkListElment.setAttribute("data-id", id);
 			alkListElment.textContent = `Alkalinity: ${hydro}`;
@@ -240,6 +230,11 @@ function postLogs() {
 			templistElement.textContent = `Temperature: ${temp}`;
 
 			paramLogsArray.push(templistElement);
+
+			calciumElement.setAttribute("data-id", id);
+			calciumElement.textContent = `Calcium: ${calcium}`;
+
+			paramLogsArray.push(calciumElement);
 		}
 
 		//remove li's .empty() removes all of the nodes
@@ -270,14 +265,24 @@ $("#clear").click((event) => {
 //Data ref for chart 1
 Database.ref("newParam").on("value", function (results) {
 	const alkalinityValue = results.val();
+	const calciumValue = results.val();
 	var alkalinityData = [];
+	var calciumData = [];
 
 	for (let id in alkalinityValue) {
 		const alkalinityChart = alkalinityValue[id].alkalinity;
+
 		alkalinityData = alkalinityData.filter((item) => item); //filter array for empty strings
 		//console.log(alkalinityData);
 		alkalinityData.push(alkalinityChart);
 	}
+	for (let id in calciumValue) {
+		const calciumChart = calciumValue[id].calcium;
+		calciumData = calciumData.filter((item) => item);
+		calciumData.push(calciumChart);
+	}
+	console.log(calciumData);
+
 	//Create labels and data variables
 	var labels1 = [
 		"Jan",
@@ -294,6 +299,7 @@ Database.ref("newParam").on("value", function (results) {
 		"Dec",
 	];
 	var data1 = alkalinityData;
+	var data2 = calciumData;
 	var colors1 = [
 		"rgba(255, 99, 132, 0.2)",
 		"rgba(54, 162, 235, 0.2)",
@@ -325,7 +331,7 @@ Database.ref("newParam").on("value", function (results) {
 	//Chart 1 DOM
 	var alkChart1 = document.getElementById("myChart").getContext("2d");
 
-	var alkChart1 = new Chart(alkChart1, {
+	alkChart1 = new Chart(alkChart1, {
 		type: "line",
 		data: {
 			labels: labels1,
@@ -340,7 +346,7 @@ Database.ref("newParam").on("value", function (results) {
 				},
 				{
 					label: "Calcium",
-					data: [440, 420, 430, 440, 455, 440, 450, 430, 425, 440, 400, 430],
+					data: data2 /*[440, 420, 430, 440, 455, 440, 450, 430, 425, 440, 400, 430],*/,
 					type: "bar",
 					backgroundColor: borderColor1,
 					fill: true,
@@ -434,7 +440,7 @@ Database.ref("newParam").on("value", function (results) {
 
 	var myChart2 = document.getElementById("myChart2").getContext("2d");
 
-	var myChart2 = new Chart(myChart2, {
+	myChart2 = new Chart(myChart2, {
 		type: "line",
 		data: {
 			labels: labels2,
@@ -496,7 +502,7 @@ Database.ref("newParam").on("value", function (results) {
 
 	var myChart3 = document.getElementById("myChart3").getContext("2d");
 
-	var myChart3 = new Chart(myChart3, {
+	myChart3 = new Chart(myChart3, {
 		type: "polarArea",
 		data: {
 			labels: labels3,
@@ -644,11 +650,11 @@ Database.ref("newParam").on("value", function (results) {
 // 	shop6.append(tangImage1);
 // });
 
-const wikiURL =
-	"https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=%27List_of_marine_aquarium_fish_species%27";
-// let response = async function wikiData() {
-// 	let response = await fetch(wikiURL)
-// 		.then((response) => {
+// const wikiURL =
+// 	"https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&generator=search&gsrnamespace=0&gsrlimit=5&gsrsearch=%27List_of_marine_aquarium_fish_species%27";
+// // let response = async function wikiData() {
+// // 	let response = await fetch(wikiURL)
+// // 		.then((response) => {
 // 			if (response.ok) {
 // 				console.log(response.json());
 // 			} else {
@@ -681,14 +687,14 @@ const wikiURL =
 // 		console.log(yelpLinks[i]);
 // 	}
 
-fetch(wikiURL)
-	.then((response) => {
-		if (response.ok) {
-			return response.json();
-		} else {
-			throw new Error("Not working,Try again");
-		}
-	})
-	.then((data) => {
-		console.log(data);
-	});
+// fetch(wikiURL)
+// 	.then((response) => {
+// 		if (response.ok) {
+// 			return response.json();
+// 		} else {
+// 			throw new Error("Not working,Try again");
+// 		}
+// 	})
+// 	.then((data) => {
+// 		console.log(data);
+// 	});
